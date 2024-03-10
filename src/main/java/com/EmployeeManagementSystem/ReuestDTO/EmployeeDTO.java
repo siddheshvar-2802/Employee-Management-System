@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeDTO {
 
-    private Integer employeeId;
+    private Integer id;
     private String firstName;
     private String lastName;
     private String emailId;

@@ -17,7 +17,7 @@ public class EmployeeImpl implements EmployeeService {
     @Override
     public Employee addEmployee(EmployeeDTO employeeDTO) {
         Employee newEmployee = new Employee();
-        newEmployee.setEmployeeId(employeeDTO.getEmployeeId());
+        newEmployee.setId(employeeDTO.getId());
         newEmployee.setFirstName(employeeDTO.getFirstName());
         newEmployee.setLastName(employeeDTO.getLastName());
         newEmployee.setEmailId(employeeDTO.getEmailId());
@@ -40,18 +40,18 @@ public class EmployeeImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployeeById(EmployeeDTO employeeDTO, Integer employeeId) {
-        Employee exEmployee = employeeRepository.findById(employeeId).orElseThrow(()->
+    public Employee updateEmployeeById(Integer id, EmployeeDTO employeeDTO) {
+        Employee exEmp = employeeRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Employee not found!"));
 
-        exEmployee.setFirstName(employeeDTO.getFirstName());
-        exEmployee.setLastName(employeeDTO.getLastName());
-        exEmployee.setEmployeeId(employeeDTO.getEmployeeId());
-        exEmployee.setContact(employeeDTO.getContact());
-        exEmployee.setBirthdate(employeeDTO.getBirthdate());
-        exEmployee.setAddress(employeeDTO.getAddress());
-
-        return employeeRepository.save(exEmployee);
+//        exEmp.setId(employeeDTO.getId());
+        exEmp.setFirstName(employeeDTO.getFirstName());
+        exEmp.setLastName(employeeDTO.getLastName());
+        exEmp.setEmailId(employeeDTO.getEmailId());
+        exEmp.setBirthdate(employeeDTO.getBirthdate());
+        exEmp.setContact(employeeDTO.getContact());
+        exEmp.setAddress(employeeDTO.getAddress());
+        return this.employeeRepository.save(exEmp);
     }
 
     @Override

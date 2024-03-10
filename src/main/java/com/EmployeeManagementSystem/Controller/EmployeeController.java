@@ -27,15 +27,15 @@ public class EmployeeController {
         return employeeService.getAllEmployee();
     }
 
-    @GetMapping("/GetEmployee/{employeeId}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer employeeId){
-        return new ResponseEntity<Employee>(employeeService.getEmployeeById(employeeId),HttpStatus.FOUND);
+    @GetMapping("/Get/{employeeId}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id){
+        return new ResponseEntity<Employee>(employeeService.getEmployeeById(id),HttpStatus.FOUND);
     }
 
-    @PutMapping("/update/{employeeId}")
-    public ResponseEntity<String> updateEmployeeById(@PathVariable Integer employeeId,
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateEmployeeById(@PathVariable Integer id,
                                                      @RequestBody EmployeeDTO employeeDTO){
-        employeeService.updateEmployeeById(employeeDTO,employeeId);
+        employeeService.updateEmployeeById(id, employeeDTO);
         return ResponseEntity.ok("Employee details are updated successfully!");
     }
 
