@@ -38,5 +38,7 @@ public class Employee {
     @Column(name = "address", length = 100)
     private String address;
 
-
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 }
