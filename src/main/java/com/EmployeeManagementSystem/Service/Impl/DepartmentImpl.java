@@ -17,8 +17,10 @@ public class DepartmentImpl implements DepartmentService {
     @Override
     public Department addDepartment(DepartmentDTO departmentDTO) {
         Department newDepartment = new Department();
+
         newDepartment.setDepartmentName(departmentDTO.getDepartmentName());
         newDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
+
         return this.departmentRepository.save(newDepartment);
     }
 

@@ -3,6 +3,7 @@ package com.EmployeeManagementSystem.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,18 +12,17 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Department")
-public class Department {
+@Table(name = "Designation")
+public class Designation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String designationName;
+    private String getDesignationDescription;
 
-    private String departmentName;
-    private String departmentDescription;
-
-    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "designation")
+    private List<Employee> employee;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
