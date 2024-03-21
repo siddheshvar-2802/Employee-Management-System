@@ -17,7 +17,7 @@ public class EmployeeImpl implements EmployeeService {
     @Override
     public Employee addEmployee(EmployeeDTO employeeDTO) {
         Employee newEmployee = new Employee();
-        newEmployee.setId(employeeDTO.getId());
+
         newEmployee.setFirstName(employeeDTO.getFirstName());
         newEmployee.setLastName(employeeDTO.getLastName());
         newEmployee.setEmailId(employeeDTO.getEmailId());
@@ -44,7 +44,6 @@ public class EmployeeImpl implements EmployeeService {
         Employee exEmp = employeeRepository.findById(id).orElseThrow(()->
                 new RuntimeException("Employee not found!"));
 
-//        exEmp.setId(employeeDTO.getId());
         exEmp.setFirstName(employeeDTO.getFirstName());
         exEmp.setLastName(employeeDTO.getLastName());
         exEmp.setEmailId(employeeDTO.getEmailId());

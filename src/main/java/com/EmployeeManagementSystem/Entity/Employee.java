@@ -41,4 +41,23 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "designation_id")
+    private Designation designation;
+
+    @Column(name = "IsDeleted")
+    private Boolean isDeleted;
+
+    @Column(name = "CreatedBy")
+    private Integer createdBy;
+
+    @Column(name = "CreatedOn")
+    private Date createdOn;
+
+    @Column(name = "ModifiedBy")
+    private Integer modifiedBy;
+
+    @Column(name = "ModifiedOn")
+    private Date modifiedOn;
 }
