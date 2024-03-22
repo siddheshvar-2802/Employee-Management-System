@@ -22,7 +22,11 @@ public class Designation {
     private String getDesignationDescription;
 
     @OneToMany(mappedBy = "designation")
-    private List<Employee> employee;
+    private List<Employee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
