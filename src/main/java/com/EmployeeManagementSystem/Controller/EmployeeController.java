@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/Employee")
 public class EmployeeController {
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -28,8 +29,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/Get/{employeeId}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id){
-        return new ResponseEntity<Employee>(employeeService.getEmployeeById(id),HttpStatus.FOUND);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer employeeId){
+        return new ResponseEntity<Employee>(employeeService.getEmployeeById(employeeId),HttpStatus.FOUND);
     }
 
     @PutMapping("/update/{id}")
