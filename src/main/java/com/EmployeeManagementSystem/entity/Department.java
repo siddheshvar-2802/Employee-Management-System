@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.Entity;
+package com.EmployeeManagementSystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,18 +16,18 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "designation_master")
-public class Designation {
+@Table(name = "department_master")
+public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "designation_name")
-    private String designationName;
+    @Column(name = "department_name")
+    private String departmentName;
 
-    @Column(name = "designation_description")
-    private String designationDescription;
+    @Column(name = "department_description")
+    private String departmentDescription;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;

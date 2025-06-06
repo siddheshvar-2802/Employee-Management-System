@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.Entity;
+package com.EmployeeManagementSystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

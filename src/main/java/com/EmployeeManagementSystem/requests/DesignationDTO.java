@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.ReuestDTO;
+package com.EmployeeManagementSystem.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,11 +1,12 @@
-package com.EmployeeManagementSystem.Service.Impl;
+package com.EmployeeManagementSystem.service.Impl;
 
-import com.EmployeeManagementSystem.Entity.Department;
-import com.EmployeeManagementSystem.Repository.DepartmentRepository;
-import com.EmployeeManagementSystem.ReuestDTO.DepartmentDTO;
-import com.EmployeeManagementSystem.Service.DepartmentService;
+import com.EmployeeManagementSystem.entity.Department;
+import com.EmployeeManagementSystem.repository.DepartmentRepository;
+import com.EmployeeManagementSystem.requests.DepartmentDTO;
+import com.EmployeeManagementSystem.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -31,13 +32,13 @@ public class DepartmentImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentById(Integer id) {
-        return this.departmentRepository.findById(id).orElseThrow(()->
+        return this.departmentRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Department not found!"));
     }
 
     @Override
     public Department updateDepartmentById(Integer id, DepartmentDTO departmentDTO) {
-        Department oldDepartment = departmentRepository.findById(id).orElseThrow(()->
+        Department oldDepartment = departmentRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Department not found to update!"));
 
         oldDepartment.setDepartmentName(departmentDTO.getDepartmentName());
@@ -48,7 +49,7 @@ public class DepartmentImpl implements DepartmentService {
 
     @Override
     public void deleteDepartmentById(Integer id) {
-        departmentRepository.findById(id).orElseThrow(()->
+        departmentRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("No department found to delete!"));
         departmentRepository.deleteById(id);
     }

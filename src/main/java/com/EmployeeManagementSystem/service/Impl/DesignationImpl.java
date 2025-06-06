@@ -1,11 +1,12 @@
-package com.EmployeeManagementSystem.Service.Impl;
+package com.EmployeeManagementSystem.service.Impl;
 
-import com.EmployeeManagementSystem.Entity.Designation;
-import com.EmployeeManagementSystem.Repository.DesignationRepository;
-import com.EmployeeManagementSystem.ReuestDTO.DesignationDTO;
-import com.EmployeeManagementSystem.Service.DesignationService;
+import com.EmployeeManagementSystem.entity.Designation;
+import com.EmployeeManagementSystem.repository.DesignationRepository;
+import com.EmployeeManagementSystem.requests.DesignationDTO;
+import com.EmployeeManagementSystem.service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -30,13 +31,13 @@ public class DesignationImpl implements DesignationService {
 
     @Override
     public Designation getDesignationById(Integer id) {
-        return this.designationRepository.findById(id).orElseThrow(()->
+        return this.designationRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("No such designation found!"));
     }
 
     @Override
     public Designation updateDesignationByd(Integer id, DesignationDTO designationDTO) {
-        Designation exDesignation = designationRepository.findById(id).orElseThrow(()->
+        Designation exDesignation = designationRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("No such designation found!"));
 
         exDesignation.setDesignationName(designationDTO.getDesignationName());
@@ -47,7 +48,7 @@ public class DesignationImpl implements DesignationService {
 
     @Override
     public void deleteDesignationById(Integer id) {
-        designationRepository.findById(id).orElseThrow(()->
+        designationRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("No such designation found!"));
         designationRepository.deleteById(id);
     }

@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.Entity;
+package com.EmployeeManagementSystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,35 +6,28 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "emp_payout_details")
-public class Payout {
+@Table(name = "designation_master")
+public class Designation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "amount")
-    private double amount;
+    @Column(name = "designation_name")
+    private String designationName;
 
-    @Column(name = "payout_date")
-    private LocalDate payoutDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_employee_id", nullable = false)
-    private Employee employee;
+    @Column(name = "designation_description")
+    private String designationDescription;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
