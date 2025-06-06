@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
@@ -40,15 +39,15 @@ public class Payout {
     private Boolean isDeleted;
 
     @Column(name = "CreatedBy")
-    private Integer createdBy;
+    private String createdBy;
 
     @Column(name = "CreatedOn")
-    private Date createdOn;
+    private LocalDate createdOn;
 
     @Column(name = "ModifiedBy")
-    private Integer modifiedBy;
+    private String modifiedBy;
 
     @Column(name = "ModifiedOn")
-    private Date modifiedOn;
+    private LocalDate modifiedOn;
 
 }
