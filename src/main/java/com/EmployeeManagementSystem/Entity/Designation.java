@@ -4,29 +4,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Designation")
+@Table(name = "designation_master")
 public class Designation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "designation_name")
     private String designationName;
-    private String getDesignationDescription;
 
-    @OneToMany(mappedBy = "designation")
-    private List<Employee> employees;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @Column(name = "designation_description")
+    private String designationDescription;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
@@ -42,4 +43,5 @@ public class Designation {
 
     @Column(name = "ModifiedOn")
     private Date modifiedOn;
+
 }

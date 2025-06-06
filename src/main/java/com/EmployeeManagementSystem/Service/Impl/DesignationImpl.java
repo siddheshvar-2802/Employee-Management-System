@@ -18,7 +18,7 @@ public class DesignationImpl implements DesignationService {
         Designation newDesignation = new Designation();
 
         newDesignation.setDesignationName(designationDTO.getDesignationName());
-        newDesignation.setGetDesignationDescription(designationDTO.getDesignationDescription());
+        //newDesignation.setGetDesignationDescription(designationDTO.getDesignationDescription());
 
         return this.designationRepository.save(newDesignation);
     }
@@ -40,7 +40,7 @@ public class DesignationImpl implements DesignationService {
                 new RuntimeException("No such designation found!"));
 
         exDesignation.setDesignationName(designationDTO.getDesignationName());
-        exDesignation.setGetDesignationDescription(designationDTO.getDesignationDescription());
+        //exDesignation.setGetDesignationDescription(designationDTO.getDesignationDescription());
 
         return this.designationRepository.save(exDesignation);
     }

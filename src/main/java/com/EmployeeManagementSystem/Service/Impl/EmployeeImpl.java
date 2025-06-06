@@ -23,7 +23,7 @@ public class EmployeeImpl implements EmployeeService {
         newEmployee.setEmailId(employeeDTO.getEmailId());
         newEmployee.setContact(employeeDTO.getContact());
         newEmployee.setBirthdate(employeeDTO.getBirthdate());
-        newEmployee.setAddress(employeeDTO.getAddress());
+        //newEmployee.setAddress(employeeDTO.getAddress());
 
         return employeeRepository.save(newEmployee);
     }
@@ -49,7 +49,7 @@ public class EmployeeImpl implements EmployeeService {
         exEmp.setEmailId(employeeDTO.getEmailId());
         exEmp.setBirthdate(employeeDTO.getBirthdate());
         exEmp.setContact(employeeDTO.getContact());
-        exEmp.setAddress(employeeDTO.getAddress());
+        //exEmp.setAddress(employeeDTO.getAddress());
         return this.employeeRepository.save(exEmp);
     }
 

@@ -6,28 +6,35 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "department_master")
-public class Department {
-
+@Table(name = "emp_payout_details")
+public class Payout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "department_name")
-    private String departmentName;
+    @Column(name = "amount")
+    private double amount;
 
-    @Column(name = "department_description")
-    private String departmentDescription;
+    @Column(name = "payout_date")
+    private LocalDate payoutDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_employee_id", nullable = false)
+    private Employee employee;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;

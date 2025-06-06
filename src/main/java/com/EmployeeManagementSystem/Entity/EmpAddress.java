@@ -16,18 +16,36 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "department_master")
-public class Department {
-
+@Table(name = "employee_address")
+public class EmpAddress {
     @Id
+    @Column(name = "emp_address_id", length = 30)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "department_name")
-    private String departmentName;
+    @Column(name = "current_address", length = 50)
+    private String currentAddress;
 
-    @Column(name = "department_description")
-    private String departmentDescription;
+    @Column(name = "current_city", length = 20)
+    private String currentCity;
+
+    @Column(name = "current_state", length = 20)
+    private String currentState;
+
+    @Column(name = "current_pin", length = 6)
+    private int currentPin;
+
+    @Column(name = "permanent_address", length = 50)
+    private String permanentAddress;
+
+    @Column(name = "permanent_city", length = 20)
+    private String permanentCity;
+
+    @Column(name = "permanent_state", length = 20)
+    private String permanentState;
+
+    @Column(name = "permanent_pin", length = 6)
+    private int permanentPin;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
@@ -43,5 +61,4 @@ public class Department {
 
     @Column(name = "ModifiedOn")
     private Date modifiedOn;
-
 }

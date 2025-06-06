@@ -3,48 +3,66 @@ package com.EmployeeManagementSystem.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Employees")
+@Table(name = "employee_master")
 public class Employee {
 
     @Id
-    @Column(name = "employee_Id",length = 30)
+    @Column(name = "employee_id", length = 30)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_Name", length = 30)
+    @Column(name = "first_name", length = 20)
     private String firstName;
 
-    @Column(name = "last_Name", length = 30)
+    @Column(name = "father_name", length = 20)
+    private String fatherName;
+
+    @Column(name = "last_name", length = 20)
     private String lastName;
 
     @Column(name = "email", length = 40)
     private String emailId;
 
-    @Column(name = "contact",length = 14)
+    @Column(name = "contact", length = 14)
     @Pattern(regexp = "\\+91\\s\\d{10}", message = "Invalid phone number format. Example: +91 1234567890")
     private String contact;
 
-    @Column(name = "date_Of_Birth",length = 10)
+    @Column(name = "date_of_birth", length = 10)
     private Date birthdate;
 
-    @Column(name = "address", length = 100)
-    private String address;
+    @ManyToOne
+    @JoinColumn(name = "fk_address_id")
+    private EmpAddress address;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "fk_department_id")
     private Department department;
 
     @ManyToOne
-    @JoinColumn(name = "designation_id")
+    @JoinColumn(name = "fk_designation_id")
     private Designation designation;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payout> payouts;
 
     @Column(name = "IsDeleted")
     private Boolean isDeleted;
@@ -60,4 +78,5 @@ public class Employee {
 
     @Column(name = "ModifiedOn")
     private Date modifiedOn;
+
 }
