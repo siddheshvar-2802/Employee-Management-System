@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class DepartmentImpl implements DepartmentService {
             newDepartment.setDepartmentName(departmentDTO.getDepartmentName());
             newDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
             newDepartment.setCreatedBy(departmentDTO.getCreatedBy());
-            newDepartment.setCreatedOn(departmentDTO.getCreatedOn());
-
+            newDepartment.setIsDeleted(false);
+            newDepartment.setCreatedBy(departmentDTO.getCreatedBy());
+            newDepartment.setCreatedOn(LocalDate.now());
             newDepartment = departmentRepository.save(newDepartment);
 
             log.info("Department '{}' saved successfully with ID: {}",
