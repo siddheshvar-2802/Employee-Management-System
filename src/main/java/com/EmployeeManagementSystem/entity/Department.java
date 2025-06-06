@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -33,15 +33,15 @@ public class Department {
     private Boolean isDeleted;
 
     @Column(name = "CreatedBy")
-    private Integer createdBy;
+    private String createdBy;
 
     @Column(name = "CreatedOn")
-    private Date createdOn;
+    private LocalDate createdOn;
 
     @Column(name = "ModifiedBy")
-    private Integer modifiedBy;
+    private String modifiedBy;
 
     @Column(name = "ModifiedOn")
-    private Date modifiedOn;
+    private LocalDate modifiedOn;
 
 }

@@ -3,20 +3,13 @@ package com.EmployeeManagementSystem.controller;
 
 import com.EmployeeManagementSystem.entity.Department;
 import com.EmployeeManagementSystem.requests.DepartmentDTO;
+import com.EmployeeManagementSystem.response.DepartmentResponse;
 import com.EmployeeManagementSystem.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,14 +19,23 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> saveDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        departmentService.addDepartment(departmentDTO);
-        return ResponseEntity.ok("New Department Added!");
+    public ResponseEntity<?> saveDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        try {
+            String response = departmentService.addDepartment(departmentDTO);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/GetAll")
-    public List<Department> getAllDepartment() {
-        return new ArrayList<Department>(departmentService.getAllDepartment());
+    public ResponseEntity<?> getAllDepartment() {
+        try {
+            List<DepartmentResponse> allDepartment = departmentService.getAllDepartment();
+            return new ResponseEntity<>(allDepartment, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/Get/{id}")

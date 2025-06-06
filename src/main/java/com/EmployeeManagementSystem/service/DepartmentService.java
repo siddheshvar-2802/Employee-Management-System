@@ -2,14 +2,16 @@ package com.EmployeeManagementSystem.service;
 
 import com.EmployeeManagementSystem.entity.Department;
 import com.EmployeeManagementSystem.requests.DepartmentDTO;
+import com.EmployeeManagementSystem.response.DepartmentResponse;
+import javassist.NotFoundException;
 
 import java.util.List;
 
 public interface DepartmentService {
 
-    Department addDepartment(DepartmentDTO departmentDTO);
+    String addDepartment(DepartmentDTO departmentDTO);
 
-    List<Department> getAllDepartment();
+    List<DepartmentResponse> getAllDepartment() throws NotFoundException;
 
     Department getDepartmentById(Integer id);
 

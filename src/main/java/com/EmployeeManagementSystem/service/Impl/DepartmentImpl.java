@@ -3,31 +3,66 @@ package com.EmployeeManagementSystem.service.Impl;
 import com.EmployeeManagementSystem.entity.Department;
 import com.EmployeeManagementSystem.repository.DepartmentRepository;
 import com.EmployeeManagementSystem.requests.DepartmentDTO;
+import com.EmployeeManagementSystem.response.DepartmentResponse;
 import com.EmployeeManagementSystem.service.DepartmentService;
+import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class DepartmentImpl implements DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
     @Override
-    public Department addDepartment(DepartmentDTO departmentDTO) {
-        Department newDepartment = new Department();
+    public String addDepartment(DepartmentDTO departmentDTO) {
+        log.info("Received request to add new department: {}", departmentDTO.getDepartmentName());
 
-        newDepartment.setDepartmentName(departmentDTO.getDepartmentName());
-        newDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
+        try {
+            Department newDepartment = new Department();
+            newDepartment.setDepartmentName(departmentDTO.getDepartmentName());
+            newDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
+            newDepartment.setCreatedBy(departmentDTO.getCreatedBy());
+            newDepartment.setCreatedOn(departmentDTO.getCreatedOn());
 
-        return this.departmentRepository.save(newDepartment);
+            newDepartment = departmentRepository.save(newDepartment);
+
+            log.info("Department '{}' saved successfully with ID: {}",
+                    newDepartment.getDepartmentName(), newDepartment.getId());
+
+            return "New Department has been added.";
+        } catch (Exception e) {
+            log.error("Error while adding department: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Override
-    public List<Department> getAllDepartment() {
-        return this.departmentRepository.findAll();
+    public List<DepartmentResponse> getAllDepartment() throws NotFoundException {
+        try {
+            List<DepartmentResponse> finalResponse = new ArrayList<>();
+            List<Department> departmentList = departmentRepository.findAllDepartmentByIsDeleted(false);
+            if (!departmentList.isEmpty()) {
+                for (Department department : departmentList) {
+                    DepartmentResponse response = new DepartmentResponse();
+                    response.setDepartmentId(department != null ? department.getId() : null);
+                    response.setDepartmentName(department != null ? department.getDepartmentName() : null);
+                    response.setDepartmentDescription(department != null ? department.getDepartmentDescription() : null);
+                    response.setIsDeleted(department != null ? department.getIsDeleted() : null);
+                    finalResponse.add(response);
+                }
+                return finalResponse;
+            } else {
+                throw new NotFoundException("No department found");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
