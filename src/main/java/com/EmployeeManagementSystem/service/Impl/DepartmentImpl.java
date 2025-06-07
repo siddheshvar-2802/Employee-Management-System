@@ -10,7 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +29,9 @@ public class DepartmentImpl implements DepartmentService {
             Department newDepartment = new Department();
             newDepartment.setDepartmentName(departmentDTO.getDepartmentName());
             newDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
-            newDepartment.setCreatedBy(departmentDTO.getCreatedBy());
             newDepartment.setIsDeleted(false);
-            newDepartment.setCreatedBy(departmentDTO.getCreatedBy());
-            newDepartment.setCreatedOn(LocalDate.now());
+            newDepartment.setCreatedBy(departmentDTO.getUser());
+            newDepartment.setCreatedOn(LocalDateTime.now());
             newDepartment = departmentRepository.save(newDepartment);
 
             log.info("Department '{}' saved successfully with ID: {}",
@@ -68,26 +68,77 @@ public class DepartmentImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(Integer id) {
-        return this.departmentRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Department not found!"));
+    public DepartmentResponse getDepartmentById(Integer id) {
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Department with ID " + id + " not found"));
+
+        return mapToDepartmentResponse(department);
     }
 
     @Override
-    public Department updateDepartmentById(Integer id, DepartmentDTO departmentDTO) {
-        Department oldDepartment = departmentRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Department not found to update!"));
+    public String updateDepartmentById(Integer id, DepartmentDTO departmentDTO) {
+        if (departmentDTO == null) {
+            throw new IllegalArgumentException("DepartmentDTO cannot be null");
+        }
 
-        oldDepartment.setDepartmentName(departmentDTO.getDepartmentName());
-        oldDepartment.setDepartmentDescription(departmentDTO.getDepartmentDescription());
+        try {
+            Department department = departmentRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Department with ID " + id + " not found"));
 
-        return this.departmentRepository.save(oldDepartment);
+            if (departmentDTO.getDepartmentName() != null) {
+                department.setDepartmentName(departmentDTO.getDepartmentName());
+            }
+
+            if (departmentDTO.getDepartmentDescription() != null) {
+                department.setDepartmentDescription(departmentDTO.getDepartmentDescription());
+            }
+
+            department.setModifiedBy(departmentDTO.getUser() != null ? departmentDTO.getUser() : "System");
+            department.setModifiedOn(LocalDateTime.now());
+
+            departmentRepository.saveAndFlush(department);
+
+            return "Department with ID " + id + " successfully updated";
+        } catch (EntityNotFoundException enfe) {
+            log.error("Update failed: {}", enfe.getMessage());
+            throw enfe;
+        } catch (Exception e) {
+            log.error("Unexpected error while updating department with ID {}: {}", id, e.getMessage(), e);
+            throw new RuntimeException("An unexpected error occurred while updating the department", e);
+        }
     }
+
 
     @Override
-    public void deleteDepartmentById(Integer id) {
-        departmentRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("No department found to delete!"));
-        departmentRepository.deleteById(id);
+    public String deleteDepartmentById(Integer id) {
+        try {
+            Department department = departmentRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Department with ID " + id + " not found for deletion"));
+
+            departmentRepository.delete(department);
+            log.info("Successfully deleted department with ID {}", id);
+            return "Department with ID " + id + " was successfully deleted.";
+        } catch (EntityNotFoundException enfe) {
+            log.warn("Delete failed: {}", enfe.getMessage());
+            return enfe.getMessage();
+        } catch (Exception e) {
+            log.error("Unexpected error while deleting department with ID {}: {}", id, e.getMessage(), e);
+            return "An unexpected error occurred while deleting the department.";
+        }
     }
+
+    private DepartmentResponse mapToDepartmentResponse(Department department) {
+        if (department == null) {
+            throw new IllegalArgumentException("Department cannot be null");
+        }
+
+        DepartmentResponse response = new DepartmentResponse();
+        response.setDepartmentId(department.getId());
+        response.setDepartmentName(department.getDepartmentName());
+        response.setDepartmentDescription(department.getDepartmentDescription());
+        response.setIsDeleted(department.getIsDeleted());
+
+        return response;
+    }
+
 }

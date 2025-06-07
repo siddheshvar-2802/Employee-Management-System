@@ -13,6 +13,6 @@ public class DepartmentDTO {
     @NotBlank
     private String departmentDescription;
 
-    private String createdBy;
+    private String user;
 
 }

@@ -1,6 +1,5 @@
 package com.EmployeeManagementSystem.service;
 
-import com.EmployeeManagementSystem.entity.Department;
 import com.EmployeeManagementSystem.requests.DepartmentDTO;
 import com.EmployeeManagementSystem.response.DepartmentResponse;
 import javassist.NotFoundException;
@@ -13,9 +12,9 @@ public interface DepartmentService {
 
     List<DepartmentResponse> getAllDepartment() throws NotFoundException;
 
-    Department getDepartmentById(Integer id);
+    DepartmentResponse getDepartmentById(Integer id);
 
-    Department updateDepartmentById(Integer id, DepartmentDTO departmentDTO);
+    String updateDepartmentById(Integer id, DepartmentDTO departmentDTO);
 
-    void deleteDepartmentById(Integer id);
+    String deleteDepartmentById(Integer id);
 }
