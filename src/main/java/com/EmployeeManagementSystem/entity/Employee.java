@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -72,12 +72,12 @@ public class Employee {
     private String createdBy;
 
     @Column(name = "CreatedOn")
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @Column(name = "ModifiedBy")
     private String modifiedBy;
 
     @Column(name = "ModifiedOn")
-    private LocalDate modifiedOn;
+    private LocalDateTime modifiedOn;
 
 }
