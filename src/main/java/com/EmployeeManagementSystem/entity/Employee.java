@@ -1,4 +1,4 @@
-package com.EmployeeManagementSystem.Entity;
+package com.EmployeeManagementSystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -68,15 +69,15 @@ public class Employee {
     private Boolean isDeleted;
 
     @Column(name = "CreatedBy")
-    private Integer createdBy;
+    private String createdBy;
 
     @Column(name = "CreatedOn")
-    private Date createdOn;
+    private LocalDateTime createdOn;
 
     @Column(name = "ModifiedBy")
-    private Integer modifiedBy;
+    private String modifiedBy;
 
     @Column(name = "ModifiedOn")
-    private Date modifiedOn;
+    private LocalDateTime modifiedOn;
 
 }

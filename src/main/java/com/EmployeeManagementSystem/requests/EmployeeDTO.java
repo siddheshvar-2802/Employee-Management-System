@@ -1,9 +1,7 @@
-package com.EmployeeManagementSystem.ReuestDTO;
+package com.EmployeeManagementSystem.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

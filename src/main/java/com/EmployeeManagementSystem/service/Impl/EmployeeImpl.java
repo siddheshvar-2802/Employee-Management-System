@@ -1,9 +1,9 @@
-package com.EmployeeManagementSystem.Service.Impl;
+package com.EmployeeManagementSystem.service.Impl;
 
-import com.EmployeeManagementSystem.ReuestDTO.EmployeeDTO;
-import com.EmployeeManagementSystem.Entity.Employee;
-import com.EmployeeManagementSystem.Repository.EmployeeRepository;
-import com.EmployeeManagementSystem.Service.EmployeeService;
+import com.EmployeeManagementSystem.entity.Employee;
+import com.EmployeeManagementSystem.repository.EmployeeRepository;
+import com.EmployeeManagementSystem.requests.EmployeeDTO;
+import com.EmployeeManagementSystem.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +35,13 @@ public class EmployeeImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(Integer employeeId) {
-        return employeeRepository.findById(employeeId).orElseThrow(()->
+        return employeeRepository.findById(employeeId).orElseThrow(() ->
                 new RuntimeException("Employee not found!"));
     }
 
     @Override
     public Employee updateEmployeeById(Integer id, EmployeeDTO employeeDTO) {
-        Employee exEmp = employeeRepository.findById(id).orElseThrow(()->
+        Employee exEmp = employeeRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Employee not found!"));
 
         exEmp.setFirstName(employeeDTO.getFirstName());
@@ -55,7 +55,7 @@ public class EmployeeImpl implements EmployeeService {
 
     @Override
     public void deleteEmployeeById(Integer employeeId) {
-        employeeRepository.findById(employeeId).orElseThrow(()->
+        employeeRepository.findById(employeeId).orElseThrow(() ->
                 new RuntimeException("Employee not found!"));
         employeeRepository.deleteById(employeeId);
     }
