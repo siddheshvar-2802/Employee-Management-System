@@ -8,9 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 public class EmployeeManagementSystemApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EmployeeManagementSystemApplication.class, args);
-		System.out.println("Application is running...");
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EmployeeManagementSystemApplication.class, args);
+        System.out.println("Application is running...");
+    }
 
 }
