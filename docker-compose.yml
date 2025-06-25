@@ -27,6 +27,8 @@ services:
     ports:
       - "8080:8080"
     environment:
+      DB_HOST: db
+      DB_PORT: 5432
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root

@@ -1,14 +1,14 @@
-# Use a lightweight base image with JDK
+# Use lightweight JDK base image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory in the container
+# Set working directory inside container
 WORKDIR /app
 
-# Copy the packaged JAR file into the co gb ng7ntainer at /app
+# Copy the built JAR from target folder and rename to app.jar
 COPY target/*.jar app.jar
 
-# Expose the port on which the Spring Boot application will run (assuming it's 8080)
+# Expose the port Spring Boot runs on
 EXPOSE 8080
 
-# Run the JAR file
+# Command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
