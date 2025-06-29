@@ -29,19 +29,8 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "true"
-      # Optional: remove this line unless schema "ems" exists or is created on init
-      # SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: ems
-      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
-      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
-      SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS: "true"
-      SPRING_SERVLET_MULTIPART_ENABLED: "true"
-      SWAGGER_UI_ENABLED: "true"
+      DB_USER: postgres
+      DB_PASS: root
       SPRING_PROFILES_ACTIVE: docker
     restart: on-failure
 
